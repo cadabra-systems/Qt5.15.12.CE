@@ -44,8 +44,12 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebChromeClient;
+import android.webkit.CookieManager;
+import android.webkit.DownloadListener;
+import android.webkit.URLUtil;
 import java.lang.Runnable;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.net.Uri;
 import java.lang.String;
@@ -56,7 +60,9 @@ import android.graphics.Bitmap;
 import java.util.concurrent.Semaphore;
 import java.lang.reflect.Method;
 import android.os.Build;
+import android.os.Environment;
 import java.util.concurrent.TimeUnit;
+import android.widget.Toast;
 
 public class QtAndroidWebViewController
 {
@@ -246,6 +252,7 @@ public class QtAndroidWebViewController
                 webSettings.setGeolocationEnabled(m_hasLocationPermission);
 
                 webSettings.setJavaScriptEnabled(true);
+                webSettings.setDomStorageEnabled(true);
                 if (m_webSettingsSetDisplayZoomControls != null) {
                     try { m_webSettingsSetDisplayZoomControls.invoke(webSettings, false); } catch (Exception e) { e.printStackTrace(); }
                 }
@@ -253,6 +260,16 @@ public class QtAndroidWebViewController
                 webSettings.setPluginState(PluginState.ON);
                 m_webView.setWebViewClient((WebViewClient)new QtAndroidWebViewClient());
                 m_webView.setWebChromeClient((WebChromeClient)new QtAndroidWebChromeClient());
+                m_webView.setDownloadListener(
+                                                new DownloadListener()
+                                                {
+                                                    @Override
+                                                    public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength)
+                                                    {
+                                                        c_onPageStarted(m_id, url, null);
+                                                    }
+                                                }
+                );
                 sem.release();
             }
         });

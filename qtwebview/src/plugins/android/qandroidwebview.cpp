@@ -85,6 +85,11 @@ QAndroidWebViewPrivate::QAndroidWebViewPrivate(QObject *p)
     m_webView = m_viewController.callObjectMethod("getWebView",
                                                   "()Landroid/webkit/WebView;");
 
+    QJNIObjectPrivate webSettings = m_webView.callObjectMethod("getSettings",
+                                                               "()Landroid/webkit/WebSettings;");
+    webSettings.callMethod<void>("setJavaScriptEnabled", "(Z)V", true);
+    webSettings.callMethod<void>("setDomStorageEnabled", "(Z)V", true);
+
     m_window = QWindow::fromWinId(reinterpret_cast<WId>(m_webView.object()));
     g_webViews->insert(m_id, this);
     connect(qApp, &QGuiApplication::applicationStateChanged,
