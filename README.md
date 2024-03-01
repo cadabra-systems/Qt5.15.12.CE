@@ -22,10 +22,9 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 2b. Запустить скрипт конфигурации:
 ```bash
-<Qt5.15.2.CE-source-path>/configure \
+<Qt5.15.2.CE-source-path>/configure -xplatform android-clang \
 -I<OpenSSL1.1.1m-source-path>/include \
 -L<OpenSSL1.1.1m-library-path> \
--xplatform android-clang \
 -prefix <Qt5.15.2.CE-install-path> \
 -disable-rpath \
 -android-ndk <AndroidSDK-root-path>/ndk/22.1.7171670 \
@@ -43,8 +42,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 ## Сборка для iOS на macOS
 2. Запустить скрипт конфигурации:
 ```bash
-<Qt5.15.2.CE-source-path>/configure \
--xplatform macx-ios-clang \
+<Qt5.15.2.CE-source-path>/configure -xplatform macx-ios-clang \
 -prefix <Qt5.15.2.CE-install-path> \
 -sql-sqlite \
 -opensource \
