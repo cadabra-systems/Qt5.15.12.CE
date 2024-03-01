@@ -1,17 +1,19 @@
+# Сборка Qt 5.15.12 Cadabra Edition
+
 0. Создать необходимые директории:
-    ```bash
-    mkdir -p <Qt5.15.2.CE-source-path>
-    mkdir -p <Qt5.15.2.CE-install-path>
-    ```
+```bash
+mkdir -p <Qt5.15.2.CE-source-path>
+mkdir -p <Qt5.15.2.CE-install-path>
+```
 
 1. Склонировать репозиторий с Qt5.15.12 Cadabra Edition:
-    ```bash
-    git clone https://github.com/cadabra-systems/Qt5.15.12.CE.git <Qt5.15.2.CE-source-path>
-    ```
+```bash
+git clone https://github.com/cadabra-systems/Qt5.15.12.CE.git <Qt5.15.2.CE-source-path>
+```
 
-# Сборка для Android на Linux-based OS
+## Сборка для Android на Linux-based OS
 
-# Сборка для Android на macOS
+## Сборка для Android на macOS
 2a. Установить переменные окружения:
 ```bash
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
@@ -38,7 +40,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 -nomake examples
 ```
 
-# Сборка для iOS на macOS
+## Сборка для iOS на macOS
 2. Запустить скрипт конфигурации:
 ```bash
 <Qt5.15.2.CE-source-path>/configure \
