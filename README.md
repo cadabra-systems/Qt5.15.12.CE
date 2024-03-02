@@ -23,33 +23,36 @@ export PATH=$JAVA_HOME/bin:$PATH
 2b. Запустить скрипт конфигурации:
 ```bash
 <Qt5.15.2.CE-source-path>/configure -xplatform android-clang \
--I<OpenSSL1.1.1m-source-path>/include \
--L<OpenSSL1.1.1m-library-path> \
 -prefix <Qt5.15.2.CE-install-path> \
 -disable-rpath \
--android-ndk <AndroidSDK-root-path>/ndk/22.1.7171670 \
 -android-sdk <AndroidSDK-root-path> \
--no-warnings-are-errors \
--ssl \
+-android-ndk <AndroidSDK-root-path>/ndk/22.1.7171670 \
+-android-ndk-host darwin-x86_64
+-opengl es2 \
+-no-dbus \
+-no-qpa-platform-guard \
 -sql-sqlite \
--opensource \
--confirm-license \
--debug -separate-debug-info \
+-openssl \
+-I<OpenSSL1.1.1m-source-path>/include \
+-L<OpenSSL1.1.1m-library-path> \
 -nomake tests \
--nomake examples
+-nomake examples \
+-verbose \
+-opensource \
+-confirm-license
 ```
 
 ## Сборка для iOS на macOS
 2. Запустить скрипт конфигурации:
 ```bash
 <Qt5.15.2.CE-source-path>/configure -xplatform macx-ios-clang \
+-debug-and-release \
 -prefix <Qt5.15.2.CE-install-path> \
 -sql-sqlite \
--opensource \
--confirm-license \
--debug-and-release \
 -nomake tests \
--nomake examples
+-nomake examples \
+-opensource \
+-confirm-license
 ```
     
 3. Запустить сборку:
